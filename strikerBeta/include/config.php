@@ -99,15 +99,17 @@ if (isset($_POST['new_post'])) {
     header('location: index.php');
 }
 
-$id = (INT)$_GET['id'];
+if (isset($_GET['id'])) {
+  $id = (INT)$_GET['id'];
 
-$sql = "SELECT * FROM posts WHERE id = '$id'";
-$result = mysqli_query($db, $sql);
-$row = mysqli_fetch_assoc($result);
-$id = $row['id'];
-$title = $row['title'];
-$content = $row['content'];
-$price = $row['price'];
+  $sql = "SELECT * FROM posts WHERE id = '$id'";
+  $result = mysqli_query($db, $sql);
+  $row = mysqli_fetch_assoc($result);
+  $id = $row['id'];
+  $title = $row['title'];
+  $content = $row['content'];
+  $price = $row['price'];
+}
 
 if (isset($_POST['upd'])) {
     $id = $_POST['id'];

@@ -3,7 +3,16 @@ include("header.php");
 ?>
             <!-- Page Content-->
             <section class="py-5">
-                <div class="text-center"><h1 class="fw-bolder mb-3">Welcome <?= $_SESSION['username'] ?></h1></div>
+                <div class="text-center">
+                    <h1 class="fw-bolder mb-3">
+                        <?php if (isset($_SESSION['username'])){ ?>
+                            Welcome <?= $_SESSION['username']; ?>
+                        <?php }
+                        else { ?>
+                            Welcome to Striker, Please Login
+                        <?php } ?>
+                    </h1>
+                </div>
                 <div class="container px-5">
                     <div class="row gx-5">
                         <div class="col-xl-8">
