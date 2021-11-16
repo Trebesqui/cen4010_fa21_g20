@@ -72,7 +72,7 @@ if (isset($_POST['login'])) {
       $_SESSION["username"]=$username;
       header("location:index.php");
     }
-    if($usert['usertype'] == $usertype)	{	
+    elseif($usert['usertype'] == $usertype)	{	
       $_SESSION["username"]=$username;		
       header("location:admin.php");
     }
