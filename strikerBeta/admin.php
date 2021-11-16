@@ -6,6 +6,16 @@ if (!isset($_SESSION['username'])) {
     header("location: login.php");
     exit();
 }
+$username=$_SESSION['username'];
+$sql = "SELECT num_tokens FROM admin WHERE username = '$username'";
+
+echo $sql;
+if (!$dbcon->query($sql)) {
+    echo 'Error: ', $dbcon->error;
+}
+$tokens = (int)mysqli_query($dbcon, $sql);
+echo "<h3>$tokens</h3>";
+
 ?>
 <section class="py-5">
     <div class="text-center">

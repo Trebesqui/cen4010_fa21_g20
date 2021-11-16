@@ -1,5 +1,22 @@
 <?php
 include_once('include/config.php');
+
+require_once('vendor/autoload.php');
+\Stripe\Stripe::setApiKey('sk_test_51JvQsbLn2Kc8UgfYf3V0sFykXbE39CxrL6Pcz4praX2yYcCf8ktO5vSF2OhshjkXaau1kYeZhkMBKxzvZgj8El6K00Tc3iz5bu');
+$YOUR_DOMAIN = 'http://localhost/strikerBeta';
+$checkout_session = \Stripe\Checkout\Session::create([
+  'line_items' => [[
+    # Provide the exact Price ID (e.g. pr_1234) of the product you want to sell
+    'price' => 'price_1JvR0fLn2Kc8UgfY6g1hTc4y',
+    'quantity' => 5000,
+  ]],
+  'payment_method_types' => [
+    'card',
+  ],
+  'mode' => 'payment',
+  'success_url' => $YOUR_DOMAIN . '/success.html',
+  'cancel_url' => $YOUR_DOMAIN . '/cancel.html',
+]);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,23 +26,23 @@ include_once('include/config.php');
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Striker</title>
-        
+
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
-        
+
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        
+
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
-        
+
         <!-- My CSS -->
         <link href="css/mycss.css" rel="stylesheet" />
-        
+
     </head>
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
@@ -43,15 +60,16 @@ include_once('include/config.php');
                             <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
                             <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
                             <li class="nav-item">
-                                <?php
-                                    if (isset($_SESSION['username'])) {
-                                        echo "<li class='nav-item'>";
-                                        echo "<a href='admin.php' class='nav-link'>Profile</a>";
-                                        echo "</li>";
-                                        echo "<a href='logout.php' class='nav-link'>Logout</a>";
-                                    } else {
-                                        echo "<a href='login.php' class='nav-link'>Login</a>";
-                                    }?>
+                              <?php
+                                  if (isset($_SESSION['username'])) {
+                                      echo "<li class='nav-item'>";
+                                      echo "<a href='admin.php' class='nav-link'>Profile</a>";
+                                      echo "</li>";
+                                      echo "<a href='logout.php' class='nav-link'>Logout</a>";
+                                      echo "<li class='btn btn-outline-warning id=checkout-button'onclick=\"window.location.href='http://localhost/strikerBeta/purchase.php'\">Purchase Tokens</li>";
+                                  } else {
+                                      echo "<a href='login.php' class='nav-link'>Login</a>";
+                                  }?>
                             </li>
                             <li class="nav-item"><a class="nav-link" href="faq.php">FAQ</a></li>
                         </ul>

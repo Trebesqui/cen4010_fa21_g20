@@ -13,7 +13,13 @@
         <input type="password" placeholder="Enter Password" name="password_1"><br><br>
         <label for="password"><b>Confirm Password</b></label><br>
         <input type="password" placeholder="Confirm Password" name="password_2"><br><br>
-        
+
+        <label>Select user type: </label> <br><br>
+        <select name="usertype" id="usertype" >
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select><br><br>
+
         <button type="submit" class="signUp" name="reg_user"> Register </button><br><br>
         <hr style="width: 70%; margin-left: auto; margin-right: auto;"><br>
 		<p>

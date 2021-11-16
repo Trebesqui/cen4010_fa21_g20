@@ -9,7 +9,7 @@ include("header.php");
                             Welcome <?= $_SESSION['username']; ?>
                         <?php }
                         else { ?>
-                            Welcome to Striker, Please Login
+                            Welcome to Striker
                         <?php } ?>
                     </h1>
                 </div>
@@ -58,10 +58,10 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "<a class='link-dark' href='details.php?id=$id'><h3>$title</h3></a>";
     echo "<p>$content</p>";
     echo "<div class='small text'>$price cents</div>";
-    
+
     echo '</div>';
 }
-?>         
+?>
 
                         </div>
                     </div>
