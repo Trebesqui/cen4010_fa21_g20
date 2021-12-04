@@ -9,7 +9,7 @@ $content ="";
 $errors = array();
 
 // connect to the database
-$db = mysqli_connect('localhost', 'root', 'password', 'usersdb');
+$db = mysqli_connect('localhost', 'root', '12345', 'usersdb');
 
 // REGISTER USER
 if (isset($_POST['reg_user'])) {
@@ -73,10 +73,17 @@ if (isset($_POST['login_user'])) {
   	$password = md5($password);
   	$query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
   	$results = mysqli_query($db, $query);
+    $row=mysqli_fetch_assoc($results);
+    $id= $row['id'];
+    
   	if (mysqli_num_rows($results) == 1) {
   	  $_SESSION['username'] = $username;
+
+      
+      $_SESSION['userId'] = $id;
   	  $_SESSION['success'] = "You are now logged in";
   	  header('location: index.php');
+       
   	}else {
   		array_push($errors, "Wrong username/password combination");
   	}

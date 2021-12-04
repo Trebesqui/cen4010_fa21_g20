@@ -17,7 +17,7 @@ $checkout_session = \Stripe\Checkout\Session::create([
     'card',
   ],
   'mode' => 'payment',
-  'success_url' => $YOUR_DOMAIN . '/success.html',
+  'success_url' => $YOUR_DOMAIN . '/success3.php',
   'cancel_url' => $YOUR_DOMAIN . '/cancel.html',
 ]);
 

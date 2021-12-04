@@ -1,11 +1,15 @@
-<?php
+<?php 
+require'include/config.php';
+$sql=" UPDATE users SET security=1 WHERE username = '$username'";
+mysqli_query($db, $sql);
 
 require 'vendor/autoload.php';
+
 \Stripe\Stripe::setApiKey('sk_test_51JvQsbLn2Kc8UgfYf3V0sFykXbE39CxrL6Pcz4praX2yYcCf8ktO5vSF2OhshjkXaau1kYeZhkMBKxzvZgj8El6K00Tc3iz5bu');
 
 header('Content-Type: application/json');
 
-$YOUR_DOMAIN = 'http://localhost/strikerBeta;
+$YOUR_DOMAIN = 'http://localhost/strikerBeta';
 
 $checkout_session = \Stripe\Checkout\Session::create([
   'line_items' => [[
@@ -23,3 +27,7 @@ $checkout_session = \Stripe\Checkout\Session::create([
 
 header("HTTP/1.1 303 See Other");
 header("Location: " . $checkout_session->url);
+
+
+
+

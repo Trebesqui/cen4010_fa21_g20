@@ -1,5 +1,11 @@
 <?php
 include("header.php");
+$username=$_SESSION['username'];
+
+$sql=" UPDATE users SET security=1 WHERE username = '$username'";
+mysqli_query($db, $sql);
+
+
 ?>
             <!-- Page Content-->
 
@@ -21,7 +27,7 @@ include("header.php");
                         <div class="media">
                             <a class="thumbnail pull-left" href="#"> <img class="media-object" src="assets/token.png" style="width: 72px; height: 72px;"> </a>
                             <div class="media-body">
-                                <h4 class="media-heading"><a href="#">2 Tokens</a></h4>
+                                 <h4 class="media-heading"><a href="#">2 Tokens</a></h4>
 
 
                             </div>

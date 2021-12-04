@@ -1,22 +1,12 @@
 <?php
 include_once('include/config.php');
 
-require_once('vendor/autoload.php');
-\Stripe\Stripe::setApiKey('sk_test_51JvQsbLn2Kc8UgfYf3V0sFykXbE39CxrL6Pcz4praX2yYcCf8ktO5vSF2OhshjkXaau1kYeZhkMBKxzvZgj8El6K00Tc3iz5bu');
-$YOUR_DOMAIN = 'http://localhost/strikerBeta';
-$checkout_session = \Stripe\Checkout\Session::create([
-  'line_items' => [[
-    # Provide the exact Price ID (e.g. pr_1234) of the product you want to sell
-    'price' => 'price_1JvR0fLn2Kc8UgfY6g1hTc4y',
-    'quantity' => 5000,
-  ]],
-  'payment_method_types' => [
-    'card',
-  ],
-  'mode' => 'payment',
-  'success_url' => $YOUR_DOMAIN . '/success.html',
-  'cancel_url' => $YOUR_DOMAIN . '/cancel.html',
-]);
+
+$username=$_SESSION['username'];
+$sql1=("SELECT tokens FROM users WHERE username='$username'");
+$result = mysqli_query($db, $sql1);
+$tokens = $result->fetch_array()[0] ?? '';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,6 +32,7 @@ $checkout_session = \Stripe\Checkout\Session::create([
 
         <!-- My CSS -->
         <link href="css/mycss.css" rel="stylesheet" />
+        
 
     </head>
     <body class="d-flex flex-column h-100">
@@ -59,6 +50,7 @@ $checkout_session = \Stripe\Checkout\Session::create([
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
                             <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
+                            <li class="nav-item"><a class="nav-link" href="faq.php">FAQ</a></li>
                             <li class="nav-item">
                               <?php
                                   if (isset($_SESSION['username'])) {
@@ -66,12 +58,17 @@ $checkout_session = \Stripe\Checkout\Session::create([
                                       echo "<a href='admin.php' class='nav-link'>Profile</a>";
                                       echo "</li>";
                                       echo "<a href='logout.php' class='nav-link'>Logout</a>";
+                                      echo "<li class='nav-item'><a class='nav-link' >";
+                                      echo"Tokens:";
+                                      echo "$tokens";
+                                      echo  "</a></li>";
                                       echo "<li class='btn btn-outline-warning id=checkout-button'onclick=\"window.location.href='http://localhost/strikerBeta/purchase.php'\">Purchase Tokens</li>";
+                                      
                                   } else {
                                       echo "<a href='login.php' class='nav-link'>Login</a>";
                                   }?>
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="faq.php">FAQ</a></li>
+                            
                         </ul>
                     </div>
                 </div>
