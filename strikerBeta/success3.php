@@ -1,5 +1,6 @@
 <?php
 require("include/config.php");
+include("header.php");
 $username=$_SESSION['username'];
 $sql1=("SELECT security FROM users WHERE username='$username'");
 $result = mysqli_query($db, $sql1);
@@ -10,8 +11,6 @@ $sql2=" UPDATE users SET security = 0 WHERE username = '$username'";
 if($tourresult=="1"){
     mysqli_query($db, $sql);
     mysqli_query($db, $sql2);
-    
-include("header.php");
 }
 
 ?>

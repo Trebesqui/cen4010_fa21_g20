@@ -37,7 +37,7 @@ mysqli_query($db, $sql);
                         <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>$1.00</strong></td>
                         <td class="col-sm-1 col-md-1">
-                            <form action="/strikerBeta/checkout_1.php" method="POST">
+                            <form action="checkout_1.php" method="POST">
                                 <button type="submit" class="btn btn-success">
                                     <span class="glyphicon glyphicon-remove"></span> Checkout
                                 </button>
@@ -60,7 +60,7 @@ mysqli_query($db, $sql);
                         <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>$2.00</strong></td>
                         <td class="col-sm-1 col-md-1">
-                            <form action="/strikerBeta/checkout_2.php" method="POST">
+                            <form action="checkout_2.php" method="POST">
                                 <button type="submit" class="btn btn-success">
                                     <span class="glyphicon glyphicon-remove"></span> Checkout
                                 </button>
@@ -83,7 +83,7 @@ mysqli_query($db, $sql);
                         <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>$5.00</strong></td>
                         <td class="col-sm-1 col-md-1">
-                            <form action="/strikerBeta/checkout_3.php" method="POST">
+                            <form action="checkout_3.php" method="POST">
                                 <button type="submit" class="btn btn-success">
                                     <span class="glyphicon glyphicon-remove"></span> Checkout
                                 </button>

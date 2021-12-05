@@ -43,7 +43,8 @@ $sql = "SELECT * FROM posts ORDER BY id DESC LIMIT $offset, $rowsperpage";
 $result = mysqli_query($db, $sql);
 
 if (mysqli_num_rows($result) < 1) {
-    echo '<div class="link-dark">No post yet!</div>';
+    ?><div class="link-dark">No post yet!</div> 
+    <?php
 }
 while ($row = mysqli_fetch_assoc($result)) {
 
@@ -52,15 +53,21 @@ while ($row = mysqli_fetch_assoc($result)) {
     $content = htmlentities(($row['content']));
     $time = htmlentities($row['date']);
     $price = htmlentities($row['price']);
+    ?>
 
-    echo '<div class="mb-5">';
-    echo "<div class='small text-muted'>$time</div>";
-    echo "<a class='link-dark' href='details.php?id=$id'><h3>$title</h3></a>";
-    echo "<p>$content</p>";
-    echo "<div class='small text'>$price cents</div>";
-
-    echo '</div>';
-}
+    <div class="mb-5">
+        <div class='small text-muted'><?= $time ?></div>
+        <a class='link-dark' href='details.php?id=<?= $id ?>'><h3><?= $title ?></h3></a>
+        <form action="buy.php" method="POST">
+            <input name="id" type="hidden" value="<?=$id?>"/>
+            <button class='btn btn-outline-success' type="submit" style="float:right">Buy!</button>
+        </form>
+        <p><?= $content ?></p>
+        <div class='small text'><?= $price ?> tokens</div>
+        
+    </div>
+<?php 
+} 
 ?>
 
                         </div>
@@ -72,7 +79,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         <footer class="bg-dark py-4 mt-auto">
             <div class="container px-5">
                 <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-                    <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; Your Website 2021</div></div>
+                    <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; Striker 2021</div></div>
                     <div class="col-auto">
                         <a class="link-light small" href="#!">Privacy</a>
                         <span class="text-white mx-1">&middot;</span>

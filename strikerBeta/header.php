@@ -54,21 +54,21 @@ $tokens = $result->fetch_array()[0] ?? '';
                             <li class="nav-item">
                               <?php
                                   if (isset($_SESSION['username'])) {
-                                      echo "<li class='nav-item'>";
-                                      echo "<a href='admin.php' class='nav-link'>Profile</a>";
-                                      echo "</li>";
-                                      echo "<a href='logout.php' class='nav-link'>Logout</a>";
-                                      echo "<li class='nav-item'><a class='nav-link' >";
-                                      echo"Tokens:";
-                                      echo "$tokens";
-                                      echo  "</a></li>";
-                                      echo "<li class='btn btn-outline-warning id=checkout-button'onclick=\"window.location.href='http://localhost/strikerBeta/purchase.php'\">Purchase Tokens</li>";
-                                      
+                                    ?>
+                                      <li class='nav-item'>
+                                        <a href='admin.php' class='nav-link'>Profile</a>
+                                      </li>
+                                      <a href='logout.php' class='nav-link'>Logout</a>
+                                      <li class='nav-item'><a class='nav-link'>
+                                        Tokens: <?= $tokens ?>
+                                      </a></li>
+                                      <li class='btn btn-outline-warning' id='checkout-button' onclick="window.location.href='purchase.php'">Purchase Tokens</li>
+                                    <?php
                                   } else {
-                                      echo "<a href='login.php' class='nav-link'>Login</a>";
+                                      ?> <a href='login.php' class='nav-link'>Login</a>";
+                                      <?php
                                   }?>
                             </li>
-                            
                         </ul>
                     </div>
                 </div>

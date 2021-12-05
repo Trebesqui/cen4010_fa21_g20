@@ -2,7 +2,7 @@
 
 <div class="form-popup" id="myLogin">
     <form action="register.php" method="POST" class="form-container text-center">
-        <?php include('errors.php'); ?>
+        <?php //include('errors.php'); ?>
         <br><h1>Welcome to Striker</h1> <br>
         <label for="username"><b>Username</b></label><br>
         <input type="text" placeholder="Enter Username" name="username" value="<?php echo $username; ?>"> <br><br>

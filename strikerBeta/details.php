@@ -7,6 +7,21 @@ if (!isset($_SESSION['username'])) {
 include("header.php");
 $id = (INT)$_GET['id'];
 
+$username = $_SESSION["username"];
+$sql1 = "SELECT id FROM users WHERE username='$username'";
+$result = mysqli_query($db, $sql1);
+$a = $result->fetch_array();
+$uid = $a[0] ?? '';
+
+$sql3 = "SELECT pid FROM post_access WHERE pid='$id' AND uid='$uid'";
+$result = mysqli_query($db, $sql3);
+$a = $result->fetch_array();
+
+if ($a == NULL || $a[0] != $id) {
+    header("Location: buy.php?id=" . $id);
+    die();
+}
+
 $sql = "SELECT * FROM posts WHERE id = '$id'";
 $result = mysqli_query($db, $sql);
 $row = mysqli_fetch_assoc($result);
