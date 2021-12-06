@@ -1,8 +1,12 @@
 <?php
-include('server.php');
-session_start();
-?>
+include_once('include/config.php');
 
+$username=$_SESSION['username'];
+$sql1=("SELECT tokens FROM users WHERE username='$username'");
+$result = mysqli_query($db, $sql1);
+$tokens = $result->fetch_array()[0] ?? '';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -11,21 +15,24 @@ session_start();
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Striker</title>
-        
+
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>        
+        <script src="js/scripts.js"></script>
+
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />        
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />        
+        <link href="css/styles.css" rel="stylesheet" />
+
         <!-- My CSS -->
         <link href="css/mycss.css" rel="stylesheet" />
-
         
+
     </head>
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
@@ -42,22 +49,26 @@ session_start();
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
                             <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
-                            <li class="nav-item">
-                                <?php
-                                    if (isset($_SESSION['username'])) {
-                                        echo "<li class='nav-item'>";
-                                        echo "<a href='admin.php' class='nav-link'>Profile</a>";
-                                        echo "</li>";
-                                        echo "<a href='logout.php' class='nav-link'>Logout</a>";
-                                    } else {
-                                        echo "<a href='login.php' class='nav-link'>Login</a>";
-                                    }?>
-                            </li>
                             <li class="nav-item"><a class="nav-link" href="faq.php">FAQ</a></li>
+                            <li class="nav-item">
+                              <?php
+                                  if (isset($_SESSION['username'])) {
+                                    ?>
+                                      <li class='nav-item'>                                        
+                                        <a href='profile.php' class='nav-link'>Profile</a>
+                                      </li>
+                                      <a href='logout.php' class='nav-link'>Logout</a>
+                                      <li class='nav-item'><a class='nav-link'>
+                                        Tokens: <?= $tokens ?>
+                                      </a></li>
+                                      <li class='btn btn-outline-warning' id='checkout-button' onclick="window.location.href='purchase.php'">Purchase Tokens</li>
+                                    <?php
+                                  } else {
+                                      ?> <a href='login.php' class='nav-link'>Login</a>";
+                                      <?php
+                                  }?>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </nav>
-        </main>
-    </body>
-</html>
