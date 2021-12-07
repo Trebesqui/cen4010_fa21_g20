@@ -11,7 +11,7 @@ $sql2=" UPDATE users SET security = 0 WHERE username = '$username'";
 if($tourresult=="1"){
     mysqli_query($db, $sql);
     mysqli_query($db, $sql2);
-
+    
 }
 include("header.php");
 ?>
