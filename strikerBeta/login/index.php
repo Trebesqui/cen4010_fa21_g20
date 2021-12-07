@@ -1,4 +1,4 @@
-<?php
+<?php 
 include('server.php');
 include('header.php');
 ?>
@@ -9,7 +9,7 @@ include('header.php');
 	<div class="container px-5">
 		<div class="row gx-5">
 			<div class="col-xl-8">
-
+				
 <?php
 $sql = "SELECT COUNT(*) FROM posts";
 $result = mysqli_query($db, $sql);
@@ -44,19 +44,18 @@ while ($row = mysqli_fetch_assoc($result)) {
     $id = htmlentities($row['id']);
     $title = htmlentities($row['title']);
     $content = htmlentities(($row['content']));
-		$content = substr($content, 0, 300);
     $time = htmlentities($row['date']);
     $price = htmlentities($row['price']);
 
     echo '<div class="mb-5">';
     echo "<div class='small text-muted'>$time</div>";
     echo "<a class='link-dark' href='#!'><h3>$title</h3></a>";
-    echo "<p id='title'>$content...</p>";
+    echo "<p id='title'>$content</p>";
     echo "<div class='small text'>$price cents</div>";
-
+    
     echo '</div>';
 }
-?>
+?>  
 
 <!DOCTYPE html>
 <html>
