@@ -51,7 +51,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo '<div class="mb-5">';
     echo "<div class='small text-muted'>$time</div>";
     echo "<a class='link-dark' href='#!'><h3>$title</h3></a>";
-    echo "<p id='title'>$content</p>";
+    echo "<p id='title'>$content...</p>";
     echo "<div class='small text'>$price cents</div>";
 
     echo '</div>';
