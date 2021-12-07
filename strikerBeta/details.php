@@ -63,6 +63,8 @@ $price = $row['price'];
                                     <p class="fs-5 mb-4"><?php echo $content; ?></p>
                                 </section>
                             </article>
+                            <!-- Comments section-->
+                           
                         </div>
                     </div>
                 </div>
