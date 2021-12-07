@@ -2,14 +2,10 @@
 session_start();
 
 // initializing variables
-$username = "";
-$email    = "";
-$title = "";
-$content ="";
 $errors = array();
 
 // connect to the database
-$db = mysqli_connect('localhost', 'root', '12345', 'usersdb');
+$db = mysqli_connect('lamp.cse.fau.edu', 'cen4010_fa21_g20@fau.edu', 'syqdgsYJ6b', 'cen4010_fa21_g20');
 
 // REGISTER USER
 if (isset($_POST['reg_user'])) {
@@ -48,8 +44,8 @@ if (isset($_POST['reg_user'])) {
   if (count($errors) == 0) {
   	$password = md5($password_1);//encrypt the password before saving in the database
 
-  	$query = "INSERT INTO users (username, email, password)
-  			  VALUES('$username', '$email', '$password')";
+  	$query = "INSERT INTO users (username, email, usertype, password)
+  			  VALUES('$username', '$email', 'user', '$password')";
   	mysqli_query($db, $query);
   	$_SESSION['username'] = $username;
   	$_SESSION['success'] = "You are now logged in";
@@ -75,15 +71,15 @@ if (isset($_POST['login_user'])) {
   	$results = mysqli_query($db, $query);
     $row=mysqli_fetch_assoc($results);
     $id= $row['id'];
-    
+
   	if (mysqli_num_rows($results) == 1) {
   	  $_SESSION['username'] = $username;
 
-      
+
       $_SESSION['userId'] = $id;
   	  $_SESSION['success'] = "You are now logged in";
   	  header('location: index.php');
-       
+
   	}else {
   		array_push($errors, "Wrong username/password combination");
   	}
@@ -132,6 +128,61 @@ if (isset($_POST['upd'])) {
     } else {
         echo "failed to edit." . mysqli_connect_error();
     }
+}
+
+//username change
+if (isset($_POST['user_change'])) {
+
+  $email = $_POST['email'];
+  $user_change = $_POST['username'];
+
+  $edit = mysqli_query($db,"UPDATE users SET username='$user_change' WHERE email = '$email'");
+
+  if($edit)  {
+    mysqli_close($db); // Close connection
+    echo "<script type='text/javascript'>alert('Successful Updated!'); window.location.href = 'profile.php';</script>";
+    exit;
+  }
+  else  {
+    echo "<script type='text/javascript'>alert('Username is taken!'); window.location.href = 'profile.php';</script>";
+    exit;
+  }
+
+}
+
+//password change
+if (isset($_POST['password_change'])) {
+
+  $email = $_POST['email'];
+  $currentPassword = $_POST['currentPassword'];
+  $newPassword = $_POST['newPassword'];
+  $confirmPassword = $_POST['confirmPassword'];
+
+  if($confirmPassword === $newPassword) {
+
+    $hash = md5($newPassword);
+    $res = mysqli_query($db,"UPDATE users SET password='$hash' WHERE email = '$email'");
+
+    if($res)
+    {
+      //Password Successfully Changed.
+      echo "<script type='text/javascript'>alert('Password Successful Changed!'); window.location.href = 'profile.php';</script>";
+      exit;
+    }
+    else
+    {
+      //Sorry, Something went wrong, Please Try Again.
+      echo "<script type='text/javascript'>alert('Sorry, Something went wrong, Please Try Again.'); window.location.href = 'profile.php';</script>";
+      exit;
+    }
+  }
+  else
+  {
+    //Password do not Match.
+    echo "<script type='text/javascript'>alert('Password do not Match.!'); window.location.href = 'profile.php';</script>";
+    exit;
+  }
+
 }
 
 ?>
