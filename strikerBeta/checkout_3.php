@@ -5,7 +5,7 @@ require 'vendor/autoload.php';
 
 header('Content-Type: application/json');
 
-$YOUR_DOMAIN = 'http://localhost/strikerBeta';
+$YOUR_DOMAIN = 'https://lamp.cse.fau.edu/~cen4010_fa21_g20/strikerBeta';
 
 $checkout_session = \Stripe\Checkout\Session::create([
   'line_items' => [[
@@ -18,7 +18,7 @@ $checkout_session = \Stripe\Checkout\Session::create([
   ],
   'mode' => 'payment',
   'success_url' => $YOUR_DOMAIN . '/success3.php',
-  'cancel_url' => $YOUR_DOMAIN . '/purchase.php',
+  'cancel_url' => $YOUR_DOMAIN . '/cancel.html',
 ]);
 
 header("HTTP/1.1 303 See Other");
