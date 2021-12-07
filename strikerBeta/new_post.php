@@ -10,7 +10,7 @@ include("header.php");
     <label for="content" >Content</label><br>
     <textarea name="content" class="content"></textarea>
     <br><br>
-    
+
     <label for="price" >Price:</label>
     <textarea name="price" class="price"></textarea><br><br><br>
 

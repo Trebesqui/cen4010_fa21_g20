@@ -1,4 +1,4 @@
-<?php 
+<?php
 require'include/config.php';
 $sql=" UPDATE users SET security=1 WHERE username = '$username'";
 mysqli_query($db, $sql);
@@ -9,7 +9,7 @@ require 'vendor/autoload.php';
 
 header('Content-Type: application/json');
 
-$YOUR_DOMAIN = 'http://localhost/strikerBeta';
+$YOUR_DOMAIN = 'https://lamp.cse.fau.edu/~cen4010_fa21_g20/strikerBeta';
 
 $checkout_session = \Stripe\Checkout\Session::create([
   'line_items' => [[
@@ -22,12 +22,8 @@ $checkout_session = \Stripe\Checkout\Session::create([
   ],
   'mode' => 'payment',
   'success_url' => $YOUR_DOMAIN . '/success.php',
-  'cancel_url' => $YOUR_DOMAIN . '/purchase.php',
+  'cancel_url' => $YOUR_DOMAIN . '/cancel.html',
 ]);
 
 header("HTTP/1.1 303 See Other");
 header("Location: " . $checkout_session->url);
-
-
-
-
