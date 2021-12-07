@@ -1,11 +1,12 @@
 <?php
 include_once('include/config.php');
 
-
-$username=$_SESSION['username'];
-$sql1=("SELECT tokens FROM users WHERE username='$username'");
-$result = mysqli_query($db, $sql1);
-$tokens = $result->fetch_array()[0] ?? '';
+if (isset($_SESSION['username'])){
+  $username=$_SESSION['username'];
+  $sql1=("SELECT tokens FROM users WHERE username='$username'");
+  $result = mysqli_query($db, $sql1);
+  $tokens = $result->fetch_array()[0] ?? '';
+};
 
 ?>
 <!DOCTYPE html>
@@ -32,7 +33,7 @@ $tokens = $result->fetch_array()[0] ?? '';
 
         <!-- My CSS -->
         <link href="css/mycss.css" rel="stylesheet" />
-        
+
 
     </head>
     <body class="d-flex flex-column h-100">
@@ -65,7 +66,7 @@ $tokens = $result->fetch_array()[0] ?? '';
                                       <li class='btn btn-outline-warning' id='checkout-button' onclick="window.location.href='purchase.php'">Purchase Tokens</li>
                                     <?php
                                   } else {
-                                      ?> <a href='login.php' class='nav-link'>Login</a>";
+                                      ?> <a href='login.php' class='nav-link'>Login</a>
                                       <?php
                                   }?>
                             </li>

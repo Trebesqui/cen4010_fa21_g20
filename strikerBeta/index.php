@@ -1,5 +1,6 @@
 <?php
 include("header.php");
+
 ?>
             <!-- Page Content-->
             <section class="py-5">
@@ -43,7 +44,7 @@ $sql = "SELECT * FROM posts ORDER BY id DESC LIMIT $offset, $rowsperpage";
 $result = mysqli_query($db, $sql);
 
 if (mysqli_num_rows($result) < 1) {
-    ?><div class="link-dark">No post yet!</div> 
+    ?><div class="link-dark">No post yet!</div>
     <?php
 }
 while ($row = mysqli_fetch_assoc($result)) {
@@ -64,10 +65,10 @@ while ($row = mysqli_fetch_assoc($result)) {
         </form>
         <p><?= $content ?></p>
         <div class='small text'><?= $price ?> tokens</div>
-        
+
     </div>
-<?php 
-} 
+<?php
+}
 ?>
 
                         </div>
